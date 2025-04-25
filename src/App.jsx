@@ -50,6 +50,8 @@ const reducer = (state, action) => {
       return { ...state, index: state.index + 1, answer: null };
     case "finish":
       return { ...state, status: "finished" };
+    case "restart":
+      return { ...intialState, status: "ready", questions: state.questions };
 
     default:
       break;
@@ -114,7 +116,8 @@ function App() {
             <FinishScreen
               maxNumperQuestion={maxNumperQuestion}
               points={points}
-            />
+              dispach={dispach}
+              />
           )}
         </Main>
       </div>
