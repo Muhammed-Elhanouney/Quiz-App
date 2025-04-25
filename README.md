@@ -1,23 +1,55 @@
-# React + Vite
+⚛️ React + Vite Quiz App
+This project uses React with Vite for fast development and JSON Server to simulate a real backend with mock data.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+📦 Installation
+Install all project dependencies:
 
-Currently, two official plugins are available:
+bash
+Copy
+Edit
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## npm install
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-
-####################
 🔌 Mock API with JSON Server
 To simulate a real backend, I used json-server.
-The questions data was stored in a local JSON file (data.json) and served as a mock API.
+The quiz data is stored in data/questions.json and served as a local API.
 
-⚙️ Setup Instructions:
+⚙️ Run JSON Server:
+bash
+Copy
+Edit
 
- ## npm i to install all lib;
+## npx json-server data/questions.json
 
-## tor run json serve  : npx json-server data/questions.json
+Make sure the server is running on a port like http://localhost:3000 or adjust accordingly.
+
+🧪 Development Mode
+To run the app in development mode with hot reloading:
+
+bash
+Copy
+Edit
+
+## npm run dev
+
+🚀 Production Build
+Build the project for production:
+
+bash
+Copy
+Edit
+
+## npm run build
+
+Then preview the production build locally:
+
+bash
+Copy
+Edit
+
+## npm run preview
+
+Or deploy the generated dist folder to platforms like Netlify, Vercel, or GitHub Pages.
+
+🌐 Live Deployment
+You can deploy the contents of the dist folder to Netlify or any static hosting service to make the app live.
