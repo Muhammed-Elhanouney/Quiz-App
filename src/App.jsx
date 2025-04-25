@@ -9,12 +9,15 @@ import Question from "./components/Question";
 import NextButton from "./components/NextButton";
 import Progress from "./components/Progress";
 import FinishScreen from "./components/FinishScreen";
+import Footer from "./components/Footer";
+import Timer from "./components/Timer";
 const intialState = {
   questions: [],
   status: "loading",
   index: 0,
   answer: null,
   points: 0,
+  secondsRemaining: 480,
 };
 const reducer = (state, action) => {
   switch (action.type) {
@@ -52,6 +55,12 @@ const reducer = (state, action) => {
       return { ...state, status: "finished" };
     case "restart":
       return { ...intialState, status: "ready", questions: state.questions };
+    case "tick":
+      return {
+        ...state,
+        secondsRemaining: state.secondsRemaining - 1,
+        status: state.secondsRemaining === 0 ? "finished" : state.status,
+      };
 
     default:
       break;
@@ -59,10 +68,10 @@ const reducer = (state, action) => {
 };
 
 function App() {
-  const [{ status, questions, index, answer, points }, dispach] = useReducer(
-    reducer,
-    intialState
-  );
+  const [
+    { status, questions, index, answer, points, secondsRemaining },
+    dispach,
+  ] = useReducer(reducer, intialState);
 
   const numQusetions = questions.length;
   const maxNumperQuestion = questions.reduce((pre, cur) => pre + cur.points, 0);
@@ -71,7 +80,7 @@ function App() {
       try {
         const res = await fetch(`http://localhost:3000/questions`);
         const data = await res.json();
-        console.log(data[0]);
+        // console.log(data[0]);
         dispach({ type: "getData", payload: data });
       } catch (error) {
         // console.log(error);
@@ -104,12 +113,15 @@ function App() {
                 dispach={dispach}
                 question={questions[index]}
               />
-              <NextButton
-                index={index}
-                numQusetions={numQusetions}
-                answer={answer}
-                dispach={dispach}
-              />
+              <Footer>
+                <Timer dispach={dispach} secondsRemaining={secondsRemaining} />
+                <NextButton
+                  index={index}
+                  numQusetions={numQusetions}
+                  answer={answer}
+                  dispach={dispach}
+                />
+              </Footer>
             </>
           )}
           {status === "finished" && (
@@ -117,7 +129,7 @@ function App() {
               maxNumperQuestion={maxNumperQuestion}
               points={points}
               dispach={dispach}
-              />
+            />
           )}
         </Main>
       </div>
